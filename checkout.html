@@ -8,13 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261024c">
+<link rel="stylesheet" href="styles.css?v=20261024d">
 </head>
 <body data-page="checkout" data-no-gate class="shop-co">
 <div id="site-header"></div>
 
 <header class="sc-head"><div class="in"><a class="brand" href="index.html" id="co-brand" aria-label="The Lost Explorer home"></a>
-  <a class="sc-back" href="index.html">&larr; Back to store</a></div></header>
+  <span class="sc-back">&#128274; Secure checkout by AccelPay · <a href="index.html">Back to store</a></span></div></header>
 
 <div id="confirmed" hidden>
   <div class="sc-thanks">
@@ -22,7 +22,7 @@
     <p class="muted" id="t-num"></p>
     <h1 id="t-name">Thank you!</h1>
     <div class="sc-card"><h3>Your order is confirmed</h3><p id="t-what"></p></div>
-    <div class="sc-card"><h3>Order updates</h3><p>You will get shipping and delivery updates by email and text. Your order and customer record live in The Lost Explorer's Shopify admin.</p></div>
+    <div class="sc-card"><h3>Order updates</h3><p>You will get shipping and delivery updates by email and text. Your order and customer record stay with The Lost Explorer.</p></div>
     <p class="muted" style="font-size:.84rem">This is a sales demo. No order was placed and no card was charged.</p>
     <a class="btn" href="index.html">Continue shopping</a>
   </div>
@@ -31,7 +31,7 @@
 <div class="checkout" id="checkout-view">
   <div class="co-left"><div class="inner">
     <form id="co-form" autocomplete="on">
-      <div class="sc-sec"><div class="sc-h"><h2>Contact</h2><a href="#" class="sc-link">Log in</a></div>
+      <div class="sc-sec"><div class="sc-h"><h2>Contact</h2></div>
         <input class="co-field" type="email" name="email" placeholder="Email" required autocomplete="email">
         <label class="sc-chk"><input type="checkbox" checked> Email me with news and offers</label>
       </div>
@@ -63,7 +63,7 @@
             <div id="bill-fields" hidden><input class="co-field" placeholder="Billing address"></div>
           </div>
         </div>
-        <div class="ap-strip"><span class="ap-dot"></span><span><b>Payments, taxes and retailer routing by AccelPay</b>, inside your Shopify checkout. The order and customer data stay in your Shopify admin.</span></div>
+        <div class="ap-strip"><span class="ap-dot"></span><span><b>Payments, taxes and retailer routing by AccelPay</b>, in a white-label checkout on thelostexplorer.com. The Lost Explorer owns the customer data.</span></div>
       </div>
 
       <button class="btn block sc-paybtn" id="pay" type="submit">Pay now</button>
@@ -87,18 +87,18 @@
 
 <div id="site-footer"></div>
 
-<script src="partials.js?v=20261024c"></script>
-<script src="catalog.js?v=20261024c"></script>
-<script src="data.js?v=20261024c"></script>
+<script src="partials.js?v=20261024d"></script>
+<script src="catalog.js?v=20261024d"></script>
+<script src="data.js?v=20261024d"></script>
 <script>
-// Shopify checkout has its own minimal chrome: lift the logo, drop the store header and footer.
+// The AccelPay checkout uses minimal chrome: lift the logo, drop the store header and footer.
 (function () {
   var b = document.querySelector('header.site .brand'); var t = document.getElementById('co-brand');
   if (b && t) t.innerHTML = b.innerHTML;
   ['.topbar', '.promo-bar', 'header.site', 'footer.site'].forEach(function (s) { var e = document.querySelector(s); if (e) e.remove(); });
 })();
 </script>
-<script src="app.js?v=20261024c"></script>
+<script src="app.js?v=20261024d"></script>
 <script>
 (function () {
   if (!new URLSearchParams(location.search).get('confirmed')) return;

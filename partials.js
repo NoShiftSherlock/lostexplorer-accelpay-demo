@@ -34,16 +34,16 @@
       '<div><h4>Discover</h4><ul><li><a href="index.html#shop">Shop now</a></li><li><a href="index.html#tonight">Delivery near you</a></li><li><a href="index.html#reservebar">Gifting on ReserveBar.com</a></li></ul></div>' +
     '</div>' +
     '<div class="legal-row">Private sales demo by AccelPay. Not affiliated with or endorsed by The Lost Explorer Mezcal Company; THE LOST EXPLORER marks belong to their owner. Gopuff and ReserveBar marks belong to their owners. No real orders are placed. Please sip responsibly. 21+ only.' +
-      '<br><span class="powered">Shopify store with the AccelPay app · Orders fulfilled by licensed retailers</span></div>' +
+      '<br><span class="powered">Cart and checkout by AccelPay · Orders fulfilled by licensed retailers</span></div>' +
     '</footer>';
 
   var HOW =
     '<h3>How this works</h3>' +
-    '<p class="hw-lede">The Lost Explorer keeps its Shopify store and its Shopify checkout. The AccelPay app plugs into Shopify and handles the parts that make alcohol hard to sell online.</p>' +
+    '<p class="hw-lede">AccelPay\'s white-label cart runs on The Lost Explorer\'s own site, in place of the current buy button, and handles the parts that make alcohol hard to sell online.</p>' +
     '<ol class="hw-list">' +
-      '<li><strong>Native Shopify cart and checkout.</strong> The checkout stays Shopify, the best-converting checkout in ecommerce. No third-party cart, and no DNS change.</li>' +
-      '<li><strong>Payments, taxes and retailer routing by AccelPay.</strong> The app takes over payments and taxes, and routes each order to a licensed retailer in the buyer\'s state, picked by ZIP code.</li>' +
-      '<li><strong>You own the customer.</strong> Orders and customer data stay in your Shopify admin.</li>' +
+      '<li><strong>Your site, your checkout.</strong> The AccelPay cart and checkout run on thelostexplorer.com in your branding, so shoppers never leave your site. It loads through a script tag and a CNAME record.</li>' +
+      '<li><strong>Payments, taxes and retailer routing by AccelPay.</strong> AccelPay handles payments and taxes, and routes each order to a licensed retailer in the buyer\'s state, picked by ZIP code.</li>' +
+      '<li><strong>You own the customer.</strong> The Lost Explorer owns the customer data from every order.</li>' +
       '<li><strong>Instant delivery.</strong> About 30 minutes through Gopuff, plus DoorDash from local retailers. 3,500+ licensed retail locations across 40+ states. Launch in about one week, with no per-order charge to the brand.</li>' +
       '<li><strong>Reordering.</strong> Reordering is built in. We track depletions at each retailer and flag reorders with suggested POs when stock runs low. For brands distributed by Southern Glazer\'s, we\'re setting up a pilot to send those reorders straight into Proof.</li>' +
       '<li><strong>ReserveBar.com.</strong> The Lost Explorer is already listed on ReserveBar.com. Brands that switch their white-label store to our plugins (the AccelPay or LiquidCommerce cart, or our native Shopify integration) automatically receive advertising credit on ReserveBar.com and Minibar.</li>' +
@@ -55,7 +55,7 @@
     '<aside class="drawer" id="drawer" aria-label="Shopping cart"><header><h2>Your cart</h2><button class="x" id="drawer-close" aria-label="Close cart">&times;</button></header>' +
     '<div class="items" id="drawer-items"></div><div class="foot" id="drawer-foot"></div></aside>' +
     '<div class="toast" id="toast" role="status"></div>' +
-    '<div class="ribbon">Demo · Shopify + AccelPay app <button id="how-open">How this works</button></div>' +
+    '<div class="ribbon">Demo · AccelPay cart <button id="how-open">How this works</button></div>' +
     '<div class="how-scrim" id="how-scrim"></div><aside class="how-panel" id="how-panel" aria-label="How this works"><button class="x" id="how-close" aria-label="Close">&times;</button>' + HOW + '</aside>';
 
   var gate =

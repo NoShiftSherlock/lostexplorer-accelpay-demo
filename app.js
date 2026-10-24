@@ -1,9 +1,9 @@
-/* The Lost Explorer: Shopify store + AccelPay app (static sales demo).
+/* The Lost Explorer: AccelPay white-label cart on their own site (static sales demo).
  *
  * What this simulates
- *   The brand's own Shopify storefront with the native Shopify cart drawer and a
- *   Shopify-style one-page checkout. The AccelPay Shopify app sits inside that
- *   checkout: it handles payments and taxes and routes the order to a licensed
+ *   The brand's own WordPress site with the AccelPay white-label cart drawer and
+ *   one-page checkout in place of the old buy button. AccelPay handles payments
+ *   and taxes and routes the order to a licensed
  *   retailer in the buyer's state (or Gopuff for instant delivery), picked by ZIP.
  *   No third-party cart. Card payments only: no express wallet buttons and no
  *   subscription options are shown.
@@ -31,7 +31,7 @@
   const STATE_NAMES = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',PR:'Puerto Rico' };
 
   // ---------------------------------------------------------------- state
-  const LS = 'le-shopify-demo-v2';
+  const LS = 'le-accelpay-cart-v3';
   const state = load() || { zip: null, st: null, items: [], promo: null, method: null };
   function load() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
   function save() { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} }
@@ -122,7 +122,7 @@
   }
   function clearZip() { state.zip = null; state.st = null; state.method = null; save(); renderAll(); }
 
-  // ---------------------------------------------------------------- cart (native Shopify behaviour)
+  // ---------------------------------------------------------------- cart
   function addToCart(sku, qty) {
     const ex = state.items.filter(i => i.sku === sku)[0];
     if (ex) ex.qty = Math.min(MAX_QTY, ex.qty + qty); else state.items.push({ sku: sku, qty: qty });
@@ -164,7 +164,7 @@
     wireZip(host);
   }
 
-  // AccelPay app block on the product page: who can deliver to this ZIP.
+  // AccelPay delivery block on the product page: who can deliver to this ZIP.
   function deliveryBlock(sku) {
     let body;
     if (!state.zip) {
@@ -181,7 +181,7 @@
         (!g && !sh.length ? '<li class="none">No licensed retailer in ' + esc(stateName(state.st)) + ' lists this bottle yet. Today it is listed in ' + statesFor(sku).map(stateName).join(', ') + '.</li>' : '') +
         '</ul><p class="fine">You pick delivery at checkout. Sold and fulfilled by a licensed retailer. 21+ only.</p>';
     }
-    return '<div class="ap-block"><div class="ap-h"><span>Delivery near you</span><span class="ap-tag">AccelPay app</span></div>' + body + '</div>';
+    return '<div class="ap-block"><div class="ap-h"><span>Delivery near you</span><span class="ap-tag">AccelPay</span></div>' + body + '</div>';
   }
 
   function wireZip(root) {
@@ -217,7 +217,7 @@
     });
   }
 
-  // ---------------------------------------------------------------- cart drawer (Shopify Dawn style)
+  // ---------------------------------------------------------------- cart drawer (AccelPay cart)
   function openDrawer() { const d = $('#drawer'); if (!d) return; d.classList.add('on'); $('#scrim').classList.add('on'); document.body.style.overflow = 'hidden'; }
   function closeDrawer() { const d = $('#drawer'); if (!d) return; d.classList.remove('on'); $('#scrim').classList.remove('on'); document.body.style.overflow = ''; }
   function renderDrawer() {
@@ -232,7 +232,7 @@
     const t = totals(), foot = $('#drawer-foot');
     if (foot) foot.innerHTML = state.items.length
       ? '<div class="totals"><div class="r big"><span>Estimated total</span><span class="v">' + money(t.subtotal) + ' USD</span></div></div>' +
-        '<p class="secure">Taxes, discounts and shipping calculated at checkout.</p>' +
+        '<p class="secure">Taxes, discounts and shipping calculated at checkout. Secure checkout by AccelPay.</p>' +
         '<a class="btn block" href="checkout.html">Check out</a>' +
         '<div class="rb-note"><img src="assets/gift.svg" alt=""><span>Also on <strong>ReserveBar.com</strong>, for gifting.</span></div>'
       : '';
@@ -245,7 +245,7 @@
     $$('[data-zip-label]').forEach(el => { el.textContent = state.zip ? state.zip + ' · ' + state.st : 'Set ZIP'; });
   }
 
-  // ---------------------------------------------------------------- checkout (Shopify one-page style)
+  // ---------------------------------------------------------------- checkout (AccelPay one-page checkout)
   function renderCheckout() {
     const side = $('#os'); if (!side) return;
     const t = totals(), m = t.method;

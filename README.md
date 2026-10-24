@@ -1,32 +1,33 @@
-# The Lost Explorer: Shopify store with the AccelPay app (private sales demo)
+# The Lost Explorer: AccelPay white-label cart (private sales demo)
 
 **This is a private sales demo built by AccelPay. It uses The Lost Explorer's
 marks, product photography and copy (from thelostexplorer.com) to show their
-store running on Shopify with the AccelPay app. It is not affiliated with or
-endorsed by The Lost Explorer Mezcal Company. THE LOST EXPLORER, Shopify,
-Gopuff, DoorDash and ReserveBar marks belong to their owners. Please keep the
-link unlisted. No real orders are placed and no cards are charged.**
+site with the AccelPay cart and checkout in place of their current buy button.
+It is not affiliated with or endorsed by The Lost Explorer Mezcal Company. THE
+LOST EXPLORER, Gopuff, DoorDash and ReserveBar marks belong to their owners.
+Please keep the link unlisted. No real orders are placed and no cards are
+charged.**
 
 Live: https://noshiftsherlock.github.io/lostexplorer-accelpay-demo/
 
 ## The pitch it shows
 
-The cart and checkout stay native Shopify (no third-party cart). The AccelPay
-Shopify app plugs in and takes over payments, taxes and routing each order to a
-licensed retailer in the buyer's state, picked by ZIP, with Gopuff instant
-delivery (about 30 minutes) where it applies. The brand keeps the order and the
-customer data in Shopify. A "How this works" panel (ribbon, bottom left) and a
-home-page section carry the talking points, including the reordering paragraph.
+AccelPay's white-label cart runs on the brand's own site. It handles payments,
+taxes and routing each order to a licensed retailer in the buyer's state, picked
+by ZIP, with Gopuff instant delivery (about 30 minutes) where it applies. The
+brand owns the customer data. A "How this works" panel (ribbon, bottom left) and
+a home-page section carry the talking points, including the reordering paragraph.
 
-Card payments only: AccelPay Payments does not support Shop Pay, wallets or
-subscriptions, so the checkout shows no express or installment buttons.
+Card payments only: the checkout shows no wallet, installment or subscription
+options. The default delivery option is the cheapest one, so the cart and
+checkout prices match.
 
 | Page | What it shows |
 | --- | --- |
 | `index.html` | Home, range, "Need it tonight?" ZIP check, How this works, ReserveBar.com note |
-| `product.html?sku=espadin-750` | Shopify product form plus the AccelPay "Delivery near you" app block |
-| cart drawer | Native Shopify-style cart (estimated total, taxes and shipping at checkout) |
-| `checkout.html` | Shopify-style one-page checkout: contact, delivery, shipping methods by ZIP (Gopuff and each in-state licensed retailer), card payment, AccelPay callouts, thank-you page |
+| `product.html?sku=espadin-750` | Product form (AccelPay cart) with a "Delivery near you" ZIP block |
+| cart drawer | AccelPay cart drawer (estimated total, taxes and shipping at checkout) |
+| `checkout.html` | AccelPay one-page checkout: contact, delivery, delivery options by ZIP (Gopuff and each in-state licensed retailer), card payment, thank-you page |
 
 Try 90028 (Los Angeles: Gopuff plus CA retailers), 10003 (New York), 78701
 (Austin, Spec's), 98109 (Seattle, Gopuff only) and 60601 (Chicago, nothing

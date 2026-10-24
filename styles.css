@@ -1,8 +1,8 @@
 /* The Lost Explorer x AccelPay demo.
    Tokens are lifted from thelostexplorer.com (2026-10-24).
    Their type is Apercu + Adobe Caslon Pro (Typekit); DM Sans and Libre Caslon Text
-   are the closest Google Fonts. The cart drawer and checkout mimic native
-   Shopify (Dawn cart, one-page checkout) with the AccelPay app inside. */
+   are the closest Google Fonts. The cart drawer and one-page checkout are the
+   AccelPay white-label cart, replacing the site's previous buy button. */
 :root {
   --crimson: #b12028; --crimson-dark: #981c22;
   --cotton: #faf7f0; --bone: #f6f3ec; --ecru: #efe3ce; --wheat: #eddbb0;
@@ -229,7 +229,7 @@ footer.site { background: var(--ink); color: #d5d0c6; }
 .ag-btns { display: flex; gap: .6rem; justify-content: center; padding-bottom: 1.2rem; border-bottom: 1px dotted var(--dots); }
 .ag-sip { font-family: var(--serif); font-style: italic; color: var(--crimson); text-transform: uppercase; letter-spacing: .12em; text-align: right; margin: 1rem 0 0; }
 
-/* ---------------------------------------------------------------- Shopify product form */
+/* ---------------------------------------------------------------- product form (AccelPay cart) */
 .product-form { display: flex; flex-direction: column; gap: 1.1rem; }
 .pf-field { display: flex; flex-direction: column; gap: .5rem; }
 .pf-label { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
@@ -245,7 +245,7 @@ footer.site { background: var(--ink); color: #d5d0c6; }
 .qty button { background: none; border: none; width: 2rem; height: 2.4rem; font-size: 1.1rem; }
 .qty span { font-family: var(--serif); font-style: italic; min-width: 1.6rem; text-align: center; }
 
-/* AccelPay app block (theme app extension) */
+/* AccelPay delivery-by-ZIP block */
 .ap-block { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .6rem; }
 .ap-h { display: flex; justify-content: space-between; align-items: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
 .ap-tag { font-size: .6rem; letter-spacing: .08em; background: var(--ecru); color: var(--ink); border-radius: 999px; padding: .15rem .55rem; font-weight: 600; }
@@ -277,7 +277,7 @@ footer.site { background: var(--ink); color: #d5d0c6; }
 .how-sec .in { max-width: 860px; margin: 0 auto; padding: 3.5rem 1.5rem; }
 .how-sec .kicker { display: block; margin-bottom: .8rem; }
 
-/* ---------------------------------------------------------------- Shopify one-page checkout
+/* ---------------------------------------------------------------- AccelPay one-page checkout
    Layout and components reused from the ondemand-delivery-mockup reference checkout. */
 body.shop-co { background: #fff; font-size: 14px; letter-spacing: .01em; }
 .sc-head { border-bottom: 1px solid #e6e6e6; }

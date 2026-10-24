@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261024c">
+<link rel="stylesheet" href="styles.css?v=20261024d">
 </head>
 <body data-page="mezcal">
 <div id="site-header"></div>
@@ -24,7 +24,7 @@
       <div class="specs"><div class="d" id="pdp-desc"></div><div class="age" id="pdp-age"></div></div>
       <dl class="facts" id="pdp-facts"></dl>
 
-      <!-- Native Shopify product form, with the AccelPay app block for delivery by ZIP. -->
+      <!-- AccelPay cart: product form and delivery by ZIP, replacing the previous buy button. -->
       <div id="product-form" class="product-form" data-sku="espadin-750"></div>
     </div>
     <div class="visual" id="pdp-visual"></div>
@@ -42,9 +42,9 @@
 
 <div id="site-footer"></div>
 
-<script src="partials.js?v=20261024c"></script>
-<script src="catalog.js?v=20261024c"></script>
-<script src="data.js?v=20261024c"></script>
+<script src="partials.js?v=20261024d"></script>
+<script src="catalog.js?v=20261024d"></script>
+<script src="data.js?v=20261024d"></script>
 <script>
 // ?sku= picks the product. Runs before app.js, which renders #product-form from data-sku.
 (function () {
@@ -74,6 +74,6 @@
     '</div><div style="background:#fff;display:grid;place-items:center;padding:1.5rem"><img src="' + base.img + '" alt="" style="max-height:440px;width:auto"></div>';
 })();
 </script>
-<script src="app.js?v=20261024c"></script>
+<script src="app.js?v=20261024d"></script>
 </body>
 </html>
