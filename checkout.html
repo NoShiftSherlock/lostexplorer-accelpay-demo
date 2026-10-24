@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout - The Lost Explorer</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261024a">
+</head>
+<body data-page="checkout" data-no-gate style="background:var(--cotton)">
+<div id="site-header"></div>
+<div class="co-top"><div class="in">
+  <a class="brand" href="index.html" id="co-brand" aria-label="The Lost Explorer home"></a>
+  <span class="secure-tag">&#128274; Secure checkout · Powered by AccelPay</span>
+</div></div>
+
+<div id="confirmed" hidden>
+  <div class="thanks">
+    <span class="kicker">Gracias, explorer</span>
+    <h1 class="h-caps" style="font-size:1.8rem;margin:.6rem 0">Order confirmed</h1>
+    <p class="num" id="order-num"></p>
+    <div class="who" id="order-who"></div>
+    <p class="muted" style="font-size:.86rem">This is a sales demo. No order was placed and no card was charged.</p>
+    <a class="btn" href="index.html">Continue exploring</a>
+  </div>
+</div>
+
+<!-- The real Elements SDK renders its hosted checkout into this container. -->
+<div data-lce-checkout></div>
+
+<div id="checkout-view">
+  <div class="co-wrap">
+    <form class="co-main" id="co-form">
+      <div class="co-step" data-form="customer">
+        <h3><span class="n">1</span> Contact</h3>
+        <div class="frm">
+          <label>First name <input name="firstName" required autocomplete="given-name"></label>
+          <label>Last name <input name="lastName" required autocomplete="family-name"></label>
+          <label class="full">Email <input type="email" name="email" required autocomplete="email"></label>
+          <label>Phone <input type="tel" name="phone" autocomplete="tel"></label>
+          <label>Date of birth <input type="date" name="birthDate" required></label>
+        </div>
+        <label class="chk"><input type="checkbox" checked><span>Email me product launches, special offers, and all things agave from The Lost Explorer.</span></label>
+      </div>
+
+      <div class="co-step">
+        <h3><span class="n">2</span> Delivery address</h3>
+        <div class="frm">
+          <label class="full">Address <input name="addressOne" required autocomplete="address-line1"></label>
+          <label>Apt / Suite <input name="addressTwo" autocomplete="address-line2"></label>
+          <label>City <input name="city" required autocomplete="address-level2"></label>
+          <label>State <input name="state" id="co-state" readonly></label>
+          <label>ZIP <input name="zipCode" id="co-zip" readonly></label>
+        </div>
+        <label class="chk"><input type="checkbox" id="is-gift"><span>This is a gift</span></label>
+        <div id="gift-fields" hidden style="margin-top:.75rem"><div class="frm">
+          <label>Recipient name <input name="giftName"></label>
+          <label class="full">Gift message <input name="message" maxlength="140"></label>
+        </div></div>
+      </div>
+
+      <div class="co-step">
+        <h3><span class="n">3</span> Delivery method</h3>
+        <div id="co-how"></div>
+        <p class="co-explain">Each bottle is sold and delivered by a licensed retailer that can legally sell to your address. The retailer sets the final price you pay.</p>
+      </div>
+
+      <div class="co-step">
+        <h3><span class="n">4</span> Payment</h3>
+        <div class="card-mock"><span>&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4242</span><span>12 / 30</span></div>
+        <div class="stripe-note">Card entry is a placeholder in this demo. The live build renders the secure payment form here.</div>
+        <div class="promo" style="margin-top:1rem"><input id="co-promo" placeholder="Discount code (try SALUDOS)"><button type="button" id="co-promo-go">Apply</button></div>
+        <button class="btn block" id="place-order" type="submit" style="margin-top:1.2rem">Place order</button>
+        <p class="legal">By placing your order you confirm you are 21 or older. An adult signature and valid ID are required on delivery.</p>
+      </div>
+    </form>
+    <aside class="co-side" id="co-summary"></aside>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="partials.js?v=20261024a"></script>
+<script src="catalog.js?v=20261024a"></script>
+<script src="data.js?v=20261024a"></script>
+<script src="elements-config.js?v=20261024a"></script>
+<script src="app.js?v=20261024a"></script>
+<script>
+(function () {
+  // reuse the header brand lockup
+  var b = document.querySelector('header.site .brand'); var t = document.getElementById('co-brand');
+  if (b && t) t.innerHTML = b.innerHTML;
+  var hdr = document.querySelector('.topbar'); if (hdr) hdr.remove();
+  var pb = document.querySelector('.promo-bar'); if (pb) pb.remove();
+  var hs = document.querySelector('header.site'); if (hs) hs.remove();
+
+  var go = document.getElementById('co-promo-go');
+  if (go) go.addEventListener('click', function () { window.LEDemo.actions.cart.applyPromoCode(document.getElementById('co-promo').value); });
+
+  if (!new URLSearchParams(location.search).get('confirmed')) return;
+  var raw = null; try { raw = JSON.parse(sessionStorage.getItem('tle-order')); } catch (e) {}
+  document.getElementById('checkout-view').hidden = true;
+  document.getElementById('confirmed').hidden = false;
+  if (raw) {
+    document.getElementById('order-num').textContent = 'Order ' + raw.orderNumber + ' · $' + (raw.total / 100).toFixed(2);
+    document.getElementById('order-who').innerHTML = '<strong>What happens next</strong><br>' + (raw.groups || []).map(function (g) {
+      return g.type === 'onDemand'
+        ? 'Gopuff in ' + g.city + ' is picking your order now. Delivered in about 30 minutes.'
+        : g.name + ' (' + g.city + ', ' + g.st + '), a licensed retailer, will ship your order. ' + g.exp + '.';
+    }).join('<br>') + '<br>Your order and customer record stay with The Lost Explorer.';
+  }
+})();
+</script>
+</body>
+</html>

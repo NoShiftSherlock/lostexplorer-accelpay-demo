@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Curiously - The Lost Explorer</title>
+<meta name="description" content="Private sales demo: thelostexplorer.com with AccelPay checkout in place of Bottle Nexus.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261024a">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+
+<section class="hero" style="background-image:url('assets/home-banner.jpg')">
+  <div class="in"><div class="copy">
+    <span class="kicker">World's best</span>
+    <p>Taste the Tequila Blanco that just won Best of Class and Best of Show in a blind test of peers by the Latin America World Spirits Competition.</p>
+    <a class="btn" href="product.html?sku=blanco-750">Shop now</a>
+  </div></div>
+</section>
+
+<section class="intro">
+  <span class="kicker">A celebration of <b style="font-weight:700">soulful spirit making</b></span>
+  <h1 class="h-caps">The Lost Explorer</h1>
+  <p>Small batch mezcal from San Pablo Huixtepec, Oaxaca, and tequila from Amatitán, Jalisco. Now delivered from licensed retailers near you, in about 30 minutes where Gopuff delivers, or shipped from a retailer in your state.</p>
+</section>
+
+<section class="shop" id="shop">
+  <h3 class="sec" id="mezcal">Mezcal expressions</h3>
+  <div class="grid" id="grid-mezcal"></div>
+  <h3 class="sec" id="tequila">Tequila expressions</h3>
+  <div class="grid" id="grid-tequila"></div>
+</section>
+
+<section class="dband" id="tonight">
+  <div class="in">
+    <div>
+      <span class="kicker">Need it tonight?</span>
+      <h2>The Lost Explorer, at your door in about 30 minutes</h2>
+      <p>Enter your ZIP. We find the licensed retailers near you that have the bottle on the shelf: Gopuff for instant delivery, or a retailer in your state that ships it to you.</p>
+      <div class="partners">
+        <span class="chip"><img src="assets/gopuff-icon.png" alt="">Gopuff</span>
+        <span class="chip"><img src="assets/doordash-icon.svg" alt="">DoorDash from local retailers</span>
+      </div>
+      <div class="zipform"><input inputmode="numeric" maxlength="5" placeholder="Your ZIP code" aria-label="ZIP code"><button class="btn" data-zip-set>Check</button></div>
+      <div class="quick">Try: <button data-zip-quick="90028">Los Angeles</button><button data-zip-quick="94103">San Francisco</button><button data-zip-quick="10003">New York</button><button data-zip-quick="77002">Houston</button><button data-zip-quick="60601">Chicago</button></div>
+    </div>
+    <div>
+      <div id="band-result"></div>
+      <ol class="how" id="how">
+        <li><span class="n">1</span><div><strong>Enter your address</strong><span>We check every licensed retailer and Gopuff location that can reach you.</span></div></li>
+        <li><span class="n">2</span><div><strong>Pick how fast</strong><span>Instant delivery in about 30 minutes, or ship it from a licensed retailer in your state.</span></div></li>
+        <li><span class="n">3</span><div><strong>Check out right here</strong><span>One secure checkout on thelostexplorer.com. A licensed retailer fills the order and checks ID on delivery.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="banner" id="story" style="background-image:url('assets/banner-mezcal.jpg')">
+  <div class="in"><span class="kicker">Our story</span><h2 class="h-caps">Made within the rhythm of nature</h2></div>
+</section>
+
+<section class="rb-band" id="reservebar">
+  <div class="in"><img src="assets/gift.svg" alt="">
+    <p><strong>Also on ReserveBar.com.</strong> Sending a bottle as a gift? The Lost Explorer is listed on ReserveBar.com, the premium spirits gifting marketplace.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="partials.js?v=20261024a"></script>
+<script src="catalog.js?v=20261024a"></script>
+<script src="data.js?v=20261024a"></script>
+<script>
+(function () {
+  var C = window.LE_CATALOG;
+  function card(sku) {
+    var p = C[sku];
+    return '<a class="card" data-card-sku="' + sku + '" href="product.html?sku=' + sku + '">' +
+      '<div class="shot"><span class="tag" hidden><img src="assets/gopuff-icon.png" alt="">About 30 min</span>' +
+      '<img src="' + p.img + '" alt="The Lost Explorer ' + p.name + '"><img class="ro" src="' + p.rollover + '" alt=""></div>' +
+      '<div class="body"><h4>' + (p.kicker ? '<span style="display:block;font-size:.62rem;letter-spacing:.14em;color:var(--crimson)">' + p.kicker + '</span>' : '') + p.name + '</h4>' +
+      '<span class="sz">' + p.size + ' · ' + p.teaser + '</span><span class="price"></span>' +
+      '<p class="desc">' + p.desc + '</p>' +
+      '<div class="acts"><button class="btn" data-add-sku="' + sku + '">Add to cart</button><span class="btn ghost">Discover</span></div></div></a>';
+  }
+  document.getElementById('grid-mezcal').innerHTML = ['espadin-750','tobala-750','salmiana-750','madre-cuishe-750'].map(card).join('');
+  document.getElementById('grid-tequila').innerHTML = ['blanco-750','reposado-750'].map(card).join('');
+})();
+</script>
+<script src="elements-config.js?v=20261024a"></script>
+<script src="app.js?v=20261024a"></script>
+</body>
+</html>

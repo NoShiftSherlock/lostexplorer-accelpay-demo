@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Espadín - The Lost Explorer</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261024a">
+</head>
+<body data-page="mezcal">
+<div id="site-header"></div>
+<div class="crumbs"><a href="index.html">Home</a> &nbsp;&gt;&nbsp; <a href="index.html#shop" id="crumb-line">Our Mezcal</a> &nbsp;&gt;&nbsp; <b id="crumb-name">Espadín</b></div>
+
+<section class="pdp">
+  <div class="in">
+    <div>
+      <div id="pdp-kicker" class="kicker" style="font-size:.8rem" hidden></div>
+      <h1 id="pdp-name">Espadín</h1>
+      <div class="sub1">100% Agave</div>
+      <div class="teaser" id="pdp-teaser"></div>
+      <div class="specs"><div class="d" id="pdp-desc"></div><div class="age" id="pdp-age"></div></div>
+      <dl class="facts" id="pdp-facts"></dl>
+
+      <div class="lce-host">
+        <div class="lce-note">AccelPay checkout · static stand-in for the LiquidCommerce product element</div>
+        <!-- The real Elements SDK renders into this container (data-lce-product = UPC). -->
+        <div id="lce-product" data-sku="espadin-750"></div>
+      </div>
+    </div>
+    <div class="visual" id="pdp-visual"></div>
+  </div>
+</section>
+
+<section class="notes"><div class="tri" id="pdp-notes"></div></section>
+<section class="sip" id="pdp-sip"></section>
+
+<section class="rb-band" id="reservebar">
+  <div class="in"><img src="assets/gift.svg" alt="">
+    <p><strong>Also on ReserveBar.com.</strong> Sending a bottle as a gift? The Lost Explorer is listed on ReserveBar.com, the premium spirits gifting marketplace.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="partials.js?v=20261024a"></script>
+<script src="catalog.js?v=20261024a"></script>
+<script src="data.js?v=20261024a"></script>
+<script>
+// ?sku= picks the product. Runs before app.js, which renders #lce-product from data-sku.
+(function () {
+  var C = window.LE_CATALOG;
+  var sku = new URLSearchParams(location.search).get('sku') || 'espadin-750';
+  if (!C[sku]) sku = 'espadin-750';
+  var p = C[sku], base = p.parent ? C[p.parent] : p;
+  document.getElementById('lce-product').setAttribute('data-sku', sku);
+  document.body.setAttribute('data-page', p.line.toLowerCase());
+  document.title = p.name + ' ' + p.size + ' - The Lost Explorer';
+  document.getElementById('crumb-line').textContent = 'Our ' + p.line;
+  document.getElementById('crumb-name').textContent = p.name;
+  document.getElementById('pdp-name').textContent = p.name;
+  if (base.kicker) { var k = document.getElementById('pdp-kicker'); k.textContent = base.kicker; k.hidden = false; }
+  document.getElementById('pdp-teaser').textContent = base.teaser;
+  document.getElementById('pdp-desc').textContent = base.desc;
+  document.getElementById('pdp-age').innerHTML = base.age ? '<b>' + base.age + '</b><span>Agave age<br>in years</span>' : '<b style="font-size:2.4rem">N&ordm;1</b><span>Small<br>batch</span>';
+  document.getElementById('pdp-facts').innerHTML = '<dt>Origin</dt><dd>' + base.origin + '</dd><dt>' + (base.line === 'Tequila' && base.family === 'reposado' ? 'Resting' : 'Distillation') + '</dt><dd>' + base.distillation + '</dd>';
+  var v = document.getElementById('pdp-visual');
+  v.innerHTML = (base.hero && !p.parent && base.family !== 'reposado')
+    ? '<img class="hero-img" src="' + base.hero + '" alt="The Lost Explorer ' + p.name + '">'
+    : '<div class="bottle"><img src="' + p.img + '" alt="The Lost Explorer ' + p.name + ' ' + p.size + '"></div>';
+  document.getElementById('pdp-notes').innerHTML = ['aroma','palate','finish'].map(function (k) {
+    return '<div><h5>' + k + '</h5><p>' + base[k] + '</p></div>'; }).join('');
+  document.getElementById('pdp-sip').innerHTML = '<div><h5>Sip ' + base.name + '</h5><p>' + base.sip + '</p>' +
+    (base.pairings && base.pairings.length ? '<h5 style="margin-top:1.6rem">Sipping suggestions</h5><ul>' + base.pairings.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '') +
+    '</div><div style="background:#fff;display:grid;place-items:center;padding:1.5rem"><img src="' + base.img + '" alt="" style="max-height:440px;width:auto"></div>';
+})();
+</script>
+<script src="elements-config.js?v=20261024a"></script>
+<script src="app.js?v=20261024a"></script>
+</body>
+</html>
