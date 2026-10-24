@@ -1,7 +1,7 @@
 /* The Lost Explorer catalog.
  * Names, sizes, GTINs, copy and imagery are taken from thelostexplorer.com on
- * 2026-10-24 (the Bottle Nexus integration block on /shop/ and each product page).
- * `sitePrice` is what the current Bottle Nexus store showed that day, kept for
+ * 2026-10-24 (the /shop/ page and each product page).
+ * `sitePrice` is what the current store showed that day, kept for
  * reference only. Prices on this demo come from the retailer that fulfils the
  * order (see data.js), because the licensed retailer sets the final price.
  */

@@ -1,57 +1,53 @@
-# The Lost Explorer x AccelPay checkout (private sales demo)
+# The Lost Explorer: Shopify store with the AccelPay app (private sales demo)
 
 **This is a private sales demo built by AccelPay. It uses The Lost Explorer's
-marks, product photography and copy (from thelostexplorer.com) to show what
-their store looks like with AccelPay checkout in place of Bottle Nexus. It is
-not affiliated with or endorsed by The Lost Explorer Mezcal Company. THE LOST
-EXPLORER, Gopuff, DoorDash and ReserveBar marks belong to their owners. Please
-keep the link unlisted. No real orders are placed and no cards are charged.**
+marks, product photography and copy (from thelostexplorer.com) to show their
+store running on Shopify with the AccelPay app. It is not affiliated with or
+endorsed by The Lost Explorer Mezcal Company. THE LOST EXPLORER, Shopify,
+Gopuff, DoorDash and ReserveBar marks belong to their owners. Please keep the
+link unlisted. No real orders are placed and no cards are charged.**
 
 Live: https://noshiftsherlock.github.io/lostexplorer-accelpay-demo/
 
+## The pitch it shows
+
+The cart and checkout stay native Shopify (no third-party cart). The AccelPay
+Shopify app plugs in and takes over payments, taxes and routing each order to a
+licensed retailer in the buyer's state, picked by ZIP, with Gopuff instant
+delivery (about 30 minutes) where it applies. The brand keeps the order and the
+customer data in Shopify. A "How this works" panel (ribbon, bottom left) and a
+home-page section carry the talking points, including the reordering paragraph.
+
+Card payments only: AccelPay Payments does not support Shop Pay, wallets or
+subscriptions, so the checkout shows no express or installment buttons.
+
 | Page | What it shows |
 | --- | --- |
-| `index.html` | Home: hero, mezcal and tequila range, "Need it tonight?" ZIP check, ReserveBar.com note |
-| `product.html?sku=espadin-750` | Product page with the commerce element: size, ZIP, instant delivery vs ship, retailer choice, add to cart |
-| `checkout.html` | Checkout: contact, address, delivery method per retailer, payment placeholder, confirmation |
-| cart drawer | On every page, grouped by fulfilling retailer |
-
-## How it works
-
-`app.js` is a static stand-in for the LiquidCommerce Elements SDK, copied from
-the `kendall-jackson-lc-demo` pattern. It publishes the same `lce:actions.*`
-events with the same `{ data, metadata }` envelope as the SDK, so it can be
-swapped for the real thing by editing `elements-config.js` (see the header in
-that file). The Lost Explorer has no LiquidCommerce partner account yet.
-
-The shopper enters a ZIP. The demo maps it to a state and shows:
-
-- **Instant delivery (about 30 minutes) via Gopuff** if that ZIP is in the
-  delivery area of a Gopuff location that carries The Lost Explorer.
-- **Ship it** from licensed retailers in the shopper's own state that list the
-  bottle, each at its own price. The retailer sets the final price.
+| `index.html` | Home, range, "Need it tonight?" ZIP check, How this works, ReserveBar.com note |
+| `product.html?sku=espadin-750` | Shopify product form plus the AccelPay "Delivery near you" app block |
+| cart drawer | Native Shopify-style cart (estimated total, taxes and shipping at checkout) |
+| `checkout.html` | Shopify-style one-page checkout: contact, delivery, shipping methods by ZIP (Gopuff and each in-state licensed retailer), card payment, AccelPay callouts, thank-you page |
 
 Try 90028 (Los Angeles: Gopuff plus CA retailers), 10003 (New York), 78701
 (Austin, Spec's), 98109 (Seattle, Gopuff only) and 60601 (Chicago, nothing
-listed yet, which shows the honest empty state).
+listed yet).
 
 ## Data sources (real)
 
 | What | Source | Date |
 | --- | --- | --- |
-| Products, GTINs, copy, images | thelostexplorer.com (`/shop/` Bottle Nexus integration block, product pages) | 2026-10-24 |
-| Retailers, cities, prices per bottle | ReserveBar / AccelPay retailer network (`liquidcommerce_mongo_retailer.variants`, active and in stock, synced Sept 1 to Oct 24 2026). One mis-keyed row (Tobalá at $49.49) dropped | 2026-10-24 |
-| Gopuff delivery ZIPs | Live Gopuff per-location brand check across 183 spirits-licensed locations, 111 carry the brand | 2026-10-24 |
-| Gopuff prices | Gopuff feed in the retailer network (Blanco, Reposado, Tobalá, Salmiana); Espadín from Gopuff's own feed snapshot | Oct 2026; Espadín June 2026 |
+| Products, GTINs, copy, images | thelostexplorer.com (`/shop/` and product pages) | 2026-10-24 |
+| Retailers, cities, prices per bottle | ReserveBar / AccelPay retailer network (active, in stock, synced Sept 1 to Oct 24 2026). One mis-keyed Tobalá row dropped. Vista Wine & Spirits, Longhorn Wine and Spirits and Mashbill are excluded | 2026-10-24 |
+| Gopuff delivery ZIPs | Live Gopuff per-location brand check, 111 of 183 spirits-licensed locations carry the brand | 2026-10-24 |
+| Gopuff prices | Gopuff feed in the retailer network; Espadín from Gopuff's June snapshot | Oct 2026 |
 
 `data.js` is generated by `scripts/gen_data.py`; do not hand-edit it.
 
 ## Illustrative (not real)
 
-Shipping fee ($14.99 per retailer shipment, waived by the brand's live promo
-code SALUDOS), Gopuff delivery fee ($6.95), tax (8% estimate), shipping times,
-the card field and the confirmation page. 200ml bottles are not listed by any
-network retailer today, so they show as unavailable.
+Shipping fee ($14.99, waived by the brand's live promo code SALUDOS), Gopuff
+delivery fee ($6.95), tax (8% estimate), shipping times, the card form and the
+thank-you page. 200ml bottles are not listed by any network retailer today.
 
 ## Deploying
 

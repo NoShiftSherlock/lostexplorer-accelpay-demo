@@ -1,7 +1,10 @@
 import json, re, collections, sys, os
 SP=sys.argv[1]; OUT=sys.argv[2]
 var=[json.loads(r['j']) for r in json.load(open(SP+'/lc_variants.json'))]
-var=[v for v in var if not v['is_gopuff'] and (v['stock'] or 0)>0 and v['synced']>='2026-09-01']
+# Excluded on request: retailers that already fulfil the brand's current store.
+EXCLUDE=('vista wine','longhorn','mashbill')
+var=[v for v in var if not v['is_gopuff'] and (v['stock'] or 0)>0 and v['synced']>='2026-09-01'
+     and not any(k in v['rname'].lower() for k in EXCLUDE)]
 UPC={'05391537970023':'espadin-750','05391537970061':'tobala-750','05391537970092':'salmiana-750',
      '00840202272184':'madre-cuishe-750','00840202272146':'blanco-750','00840202272153':'reposado-750',
      '05391537970269':'espadin-200','05391537970252':'tobala-200','05391537970245':'salmiana-200'}
